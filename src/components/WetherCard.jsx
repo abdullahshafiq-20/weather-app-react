@@ -26,7 +26,7 @@ export default function WeatherCard() {
   const getWeatherData = () => {
     axios({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=863b83758e744d55957134810242202&q='${city}'&days=4`,
+      url: `http://api.weatherapi.com/v1/forecast.json?key=863b83758e744d55957134810242202&q='${city}'&days=5`,
     })
       .then((response) => {
         setWeatherData(response.data);
@@ -41,18 +41,26 @@ export default function WeatherCard() {
   };
 
   function getNextFourDays(startDateStr) {
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
     const startDate = new Date(startDateStr);
     const result = [];
-    
+
     // Iterate to get the next four days
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       const nextDate = new Date(startDate);
       nextDate.setDate(startDate.getDate() + i);
       result.push(daysOfWeek[nextDate.getDay()]);
     }
     console.log(result);
-    
+
     return result;
   }
   function transformString(inputString) {
@@ -137,15 +145,76 @@ export default function WeatherCard() {
               <li className="forecast-item">
                 <span>{days[1]}</span>
                 <div className="forecast-item-inner">
-                  <TiWeatherSunny />
-                  <span className="forecast-temperature">16° / 16°</span>
+                  <img
+                    src={weatherData.forecast.forecastday[1].day.condition.icon}
+                    alt=""
+                  />
+                  <span className="forecast-temperature">
+                    {weatherData.forecast.forecastday[1].day.maxtemp_c}°C /{" "}
+                    {weatherData.forecast.forecastday[1].day.mintemp_c}°C
+                    ({" "}
+                    {
+                      weatherData.forecast.forecastday[1].day
+                        .daily_chance_of_rain
+                    }
+                    % <TiWeatherStormy />)
+                  </span>
                 </div>
               </li>
               <li className="forecast-item">
-                <span>Weday</span>
+                <span>{days[2]}</span>
                 <div className="forecast-item-inner">
-                  <TiWeatherSunny />
-                  <span className="forecast-temperature">16° / 16°</span>
+                  <img
+                    src={weatherData.forecast.forecastday[2].day.condition.icon}
+                    alt=""
+                  />
+                  <span className="forecast-temperature">
+                    {weatherData.forecast.forecastday[2].day.maxtemp_c}°C /{" "}
+                    {weatherData.forecast.forecastday[2].day.mintemp_c}°C ({" "}
+                    {
+                      weatherData.forecast.forecastday[2].day
+                        .daily_chance_of_rain
+                    }
+                    % <TiWeatherStormy />)
+                  </span>
+                </div>
+              </li>
+              <li className="forecast-item">
+                <span>{days[3]}</span>
+                <div className="forecast-item-inner">
+                  <img
+                    src={weatherData.forecast.forecastday[3].day.condition.icon}
+                    alt=""
+                  />
+                  <span className="forecast-temperature">
+                    {weatherData.forecast.forecastday[3].day.maxtemp_c}°C /{" "}
+                    {weatherData.forecast.forecastday[3].day.mintemp_c}°C
+                    ({" "}
+                    {
+                      weatherData.forecast.forecastday[3].day
+                        .daily_chance_of_rain
+                    }
+                    % <TiWeatherStormy />)
+                  </span>
+                </div>
+              </li>
+              <li className="forecast-item">
+                <span>{days[4]}</span>
+                <div className="forecast-item-inner">
+                  <img
+                    src={weatherData.forecast.forecastday[4].day.condition.icon}
+                    alt=""
+                  />
+                  <span className="forecast-temperature">
+                    {weatherData.forecast.forecastday[4].day.maxtemp_c}°C /{" "}
+                    {weatherData.forecast.forecastday[4].day.mintemp_c}°C
+                    ({" "}
+                    {
+                      weatherData.forecast.forecastday[4].day
+                        .daily_chance_of_rain
+                    }
+                    % <TiWeatherStormy />)
+                  </span>
                 </div>
               </li>
             </ul>

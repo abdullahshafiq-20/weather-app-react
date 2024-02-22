@@ -1,12 +1,12 @@
 .weather-card {
   /* z-index: 10; */
-  width: 350px;
+  width: 400px;
   /* background-color: #ffffff; */
   padding: 1.5rem;
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  border-radius: 5px;
+  border: 1px solid rgba(1, 1, 1,0.5);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,7 +31,7 @@
   width: calc(100% - 40px);
   /* Adjust to accommodate button width */
   height: 40px;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -58,6 +58,12 @@
   background: #3B3B3B;
   border: none;
   cursor: pointer;
+}
+.card-header .search-container button svg {
+  fill: #ffffff;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
 }
 
 
@@ -159,7 +165,7 @@ ul
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0;
   margin: 0;
   /* border: 1px solid #e5e7eb; */
 }
@@ -167,14 +173,16 @@ ul
   text-align: left;
 }
 
-.forecast-item svg {
-  width: 1.5rem;
-  height: 1.5rem;
+.forecast-item img {
+  width: 2.5rem;
+  height: 2.5rem;
   fill: #a5a5a5;
+  justify-self: flex-start;
+  display: flex;
 }
 
 .forecast-temperature {
-  margin-left: 0.5rem;
+  margin-left: 0.1rem;
   text-align: right;
 }
 .forecast-item-inner
