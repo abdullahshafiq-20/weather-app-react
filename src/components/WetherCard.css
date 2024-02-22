@@ -1,16 +1,42 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  /* font-size: 16px;
+  font-weight: 400; */
+  line-height: 1.5;
+  /* color: #333; */
+  /* background-color: #242424; */
+
+}
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #242424;
+  padding: 0;
+}
+
 .weather-card {
   /* z-index: 10; */
-  width: 400px;
+  width: 440px;
   /* background-color: #ffffff; */
   padding: 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(1, 1, 1,0.5);
+  box-shadow: 0 4px 6px rgba(1, 0, 0, 0.1);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 
 }
 
@@ -25,12 +51,13 @@
 .card-header .search-container {
   position: relative;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .card-header .search-container input {
-  width: calc(100% - 40px);
+  width: calc(100% - 10px);
   /* Adjust to accommodate button width */
-  height: 40px;
+  height: 60px;
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 5px;
   border: none;
@@ -58,12 +85,14 @@
   background: #3B3B3B;
   border: none;
   cursor: pointer;
+  margin-right: 2rem;
+
 }
 .card-header .search-container button svg {
   fill: #ffffff;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  /* padding-right: 1rem; */
 }
 
 
@@ -142,6 +171,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin-top: 2rem;
 
 
 }
@@ -195,4 +225,15 @@ ul
   width: 100%;
   text-align: right;
   /* border: 1px solid #e5e7eb; */
+}
+
+@media screen and (max-width: 768px){
+  .weather-card
+  {
+    width: 100%;
+    height: 100%;
+  }
+
+  
+  
 }
