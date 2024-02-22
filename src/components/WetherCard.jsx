@@ -26,7 +26,7 @@ export default function WeatherCard() {
   const getWeatherData = () => {
     axios({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=863b83758e744d55957134810242202&q='${city}'&days=5`,
+      url: `https://api.weatherapi.com/v1/forecast.json?key=863b83758e744d55957134810242202&q='${city}'&days=5`,
     })
       .then((response) => {
         setWeatherData(response.data);
