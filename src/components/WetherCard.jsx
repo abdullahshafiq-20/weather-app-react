@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import TransitionAlerts from './Alert';
+import "./WetherCard.css";
 
 import { TiWeatherCloudy } from "react-icons/ti";
 import { TiWeatherDownpour } from "react-icons/ti";
@@ -15,13 +17,17 @@ import { FaThermometerEmpty } from "react-icons/fa";
 import { FaSearchLocation } from "react-icons/fa";
 import { IoEnter } from "react-icons/io5";
 
-import "./WetherCard.css";
+
 
 export default function WeatherCard() {
   const [weatherIcon, setWeatherIcon] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
-  const [days, setDays] = useState(4);
+  const [days, setDays] = useState("");
+  const [is_allowed, setIsAllowed] = useState(false);
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const getWeatherData = () => {
     axios({
@@ -39,6 +45,46 @@ export default function WeatherCard() {
       });
     console.log(weatherData);
   };
+  const fetchLat=(lat,lon)=>{
+    axios({
+      method: "GET",
+      url: `https://api.weatherapi.com/v1/forecast.json?key=863b83758e744d55957134810242202&q=${lat},${lon}&days=5`,
+    })
+      .then((response) => {
+        setWeatherData(response.data);
+        setWeatherIcon(transformString(response.data.current.condition.text));
+        setDays(getNextFourDays(response.data.forecast.forecastday[0].date));
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+        // Provide feedback to the user (e.g., set an error state)
+      });
+    console.log(weatherData);
+  }
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, (error) => {
+        getWeatherData();
+        setIsAllowed(false);
+        console.log("location block");
+      });
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  function showPosition(position) {
+    
+    setIsAllowed(true);
+    console.log("location allow");
+
+    console.log(position, "position");
+    fetchLat(position.coords.latitude, position.coords.longitude);
+    getWeatherData();
+
+    // x.innerHTML = "Latitude: " + position.coords.latitude +
+    // "<br>Longitude: " + position.coords.longitude;
+  }
 
   function getNextFourDays(startDateStr) {
     const daysOfWeek = [
@@ -89,6 +135,12 @@ export default function WeatherCard() {
   };
 
   return (
+    <>
+  {
+  !is_allowed 
+    ? <TransitionAlerts severity="error" message="Please allow location to see Weather or search"/>
+    : <TransitionAlerts severity="success" message="Location Allowed" />
+}
     <div className="weather-card">
       <div className="card-header">
         <div className="search-container">
@@ -222,5 +274,6 @@ export default function WeatherCard() {
         </div>
       )}
     </div>
+    </>
   );
 }
